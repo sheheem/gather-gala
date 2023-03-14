@@ -2,9 +2,9 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { jwtConstants } from 'auth.constants';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-import { UserTokenDto } from 'src/dto/user-token.dto';
+// import { UserTokenDto } from 'src/dto/user-token.dto';
 import { UserRepository } from 'src/user/user.repository';
-import { User } from 'src/user/user.schema';
+// import { User } from 'src/user/user.schema';
 import { VendorRepository } from 'src/vendor/vendor.repository';
 import { JwtPayload } from './jwt-payload.interface';
 

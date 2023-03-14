@@ -9,6 +9,7 @@ import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 import { JwtService } from '@nestjs/jwt';
 import { VendorModule } from './vendor/vendor.module';
+import { EventModule } from './event/event.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { VendorModule } from './vendor/vendor.module';
     MongooseModule.forRoot(process.env.MONGODB_URI),
     UserModule,
     VendorModule,
+    EventModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService, AuthService, JwtService],
