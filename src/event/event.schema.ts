@@ -25,7 +25,10 @@ export class Event {
   eventDescription: string;
 
   @Prop({ required: true })
-  ticketCount: number;
+  ticketType: string;
+
+  @Prop({ required: true })
+  ticketNumber: number;
 
   @Prop({ required: true })
   ticketPrice: number;
@@ -37,13 +40,13 @@ export class Event {
   imageUrl: string;
 
   @Prop({ required: true })
-  venue: string;
+  location: string;
 
   @Prop({ required: true })
   longitude: number;
 
   @Prop({ required: true })
-  langitude: string;
+  latitude: number;
 }
 
 export const eventSchema = SchemaFactory.createForClass(Event);

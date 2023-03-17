@@ -1,14 +1,5 @@
-import {
-  Body,
-  Controller,
-  Post,
-  Req,
-  Res,
-  UseGuards,
-  ValidationPipe,
-} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { Response, response } from 'express';
+import { Body, Controller, Post, Res, ValidationPipe } from '@nestjs/common';
+import { Response } from 'express';
 import { AuthDto } from 'src/dto/authCredentials.dto';
 import { userDto } from 'src/dto/userAuth.dto';
 import { VendorLogDto } from 'src/dto/vendorDTO/vendorLogin.dto';

@@ -51,7 +51,6 @@ export class VendorRepository extends Repository<VendorDocument> {
 
   async vfindOne(email: string) {
     const vendorId = await this.entity.findOne({ email: email });
-    console.log(vendorId);
 
     if (vendorId) {
       return vendorId;

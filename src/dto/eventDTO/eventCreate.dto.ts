@@ -1,4 +1,10 @@
-import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsNumberString,
+  IsUrl,
+} from 'class-validator';
 
 export class CreateEventDto {
   @IsNotEmpty()
@@ -8,32 +14,36 @@ export class CreateEventDto {
   eventType: string;
 
   @IsNotEmpty()
-  @IsDate()
+  @IsDateString()
   startDate: Date;
 
   @IsNotEmpty()
-  @IsDate()
+  @IsDateString()
   endDate: Date;
 
   @IsNotEmpty()
   eventDescription: string;
 
   @IsNotEmpty()
+  ticketType: string;
+
+  @IsNotEmpty()
   @IsNumber()
-  ticketCount: number;
+  ticketNumber: number;
 
   @IsNotEmpty()
   @IsNumber()
   ticketPrice: number;
 
   @IsNotEmpty()
-  tickerDescription: string;
+  ticketDescription: string;
 
   @IsNotEmpty()
+  @IsUrl()
   imageUrl: string;
 
   @IsNotEmpty()
-  venue: string;
+  location: string;
 
   @IsNotEmpty()
   @IsNumber()
@@ -41,5 +51,5 @@ export class CreateEventDto {
 
   @IsNotEmpty()
   @IsNumber()
-  langitude: number;
+  latitude: number;
 }
