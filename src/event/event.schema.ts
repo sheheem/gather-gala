@@ -6,8 +6,8 @@ export type EventDocument = HydratedDocument<Event>;
 
 @Schema()
 export class Event {
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Vendor' })
-  organizer: Vendor;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Vendor', required: true })
+  organizerId: Vendor;
 
   @Prop({ required: true })
   eventName: string;
@@ -24,17 +24,23 @@ export class Event {
   @Prop({ required: true })
   eventDescription: string;
 
-  @Prop({ required: true })
-  ticketType: string;
-
-  @Prop({ required: true })
-  ticketNumber: number;
-
-  @Prop({ required: true })
-  ticketPrice: number;
-
-  @Prop({ required: true })
-  ticketDescription: string;
+  @Prop({
+    required: true,
+    type: [
+      {
+        ticketType: { type: String, required: true },
+        ticketNumber: { type: Number, required: true },
+        ticketPrice: { type: Number, required: true },
+        ticketDescription: { type: String, required: true },
+      },
+    ],
+  })
+  tickets: {
+    ticketType: string;
+    ticketNumber: number;
+    ticketPrice: number;
+    ticketDescription: string;
+  };
 
   @Prop({ required: true })
   imageUrl: string;

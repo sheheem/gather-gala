@@ -11,7 +11,6 @@ import { User, UserDocument } from './user.schema';
 import { Repository } from 'nestjs-mongoose-generic-repository';
 import { userDto } from 'src/dto/userAuth.dto';
 import { AuthDto } from 'src/dto/authCredentials.dto';
-import { UserTokenDto } from 'src/dto/user-token.dto';
 
 @Injectable()
 export class UserRepository extends Repository<UserDocument> {

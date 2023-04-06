@@ -1,10 +1,27 @@
 import {
+  IsArray,
   IsDateString,
   IsNotEmpty,
   IsNumber,
-  IsNumberString,
+  IsString,
   IsUrl,
+  ValidateNested,
 } from 'class-validator';
+import { Type } from 'class-transformer';
+
+class TicketDto {
+  @IsString()
+  ticketType: string;
+
+  @IsString()
+  ticketDescription: string;
+
+  @IsNumber()
+  ticketPrice: number;
+
+  @IsNumber()
+  ticketNumber: number;
+}
 
 export class CreateEventDto {
   @IsNotEmpty()
@@ -25,20 +42,6 @@ export class CreateEventDto {
   eventDescription: string;
 
   @IsNotEmpty()
-  ticketType: string;
-
-  @IsNotEmpty()
-  @IsNumber()
-  ticketNumber: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  ticketPrice: number;
-
-  @IsNotEmpty()
-  ticketDescription: string;
-
-  @IsNotEmpty()
   @IsUrl()
   imageUrl: string;
 
@@ -52,4 +55,9 @@ export class CreateEventDto {
   @IsNotEmpty()
   @IsNumber()
   latitude: number;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => TicketDto)
+  tickets: TicketDto[];
 }

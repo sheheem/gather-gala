@@ -22,12 +22,6 @@ export class AuthController {
     return this.AuthService.signIn(userDto);
   }
 
-  // @Post('/test')
-  // @UseGuards(AuthGuard('jwt'))
-  // test(@Req() req) {
-  //   console.log(req.user);
-  // }
-
   @Post('/vendorsignup')
   vendorSignUp(@Body(ValidationPipe) vendorSignDto: VendorSignDto) {
     return this.AuthService.vendorSignUp(vendorSignDto);
