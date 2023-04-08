@@ -1,5 +1,4 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { model } from 'mongoose';
 import { CreatedModel } from 'nestjs-mongoose-generic-repository';
 import { CreateEventDto } from 'src/dto/eventDTO/eventCreate.dto';
 import { EventRepositoray } from './event.repository';

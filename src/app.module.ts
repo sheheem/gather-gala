@@ -13,8 +13,6 @@ import { EventModule } from './event/event.module';
 import { S3Service } from './s3-bucket/s3.service';
 import { S3Controller } from './s3-bucket/s3.controller';
 import { OrderModule } from './order/order.module';
-import { OrderController } from './order/order.controller';
-import { StripeModule } from './stripe/stripe/stripe.module';
 
 @Module({
   imports: [
@@ -25,11 +23,8 @@ import { StripeModule } from './stripe/stripe/stripe.module';
     VendorModule,
     EventModule,
     OrderModule,
-    StripeModule.forRoot(process.env.STRIPESECRETID, {
-      apiVersion: '2022-11-15',
-    }),
   ],
-  controllers: [AppController, UserController, S3Controller, OrderController],
+  controllers: [AppController, S3Controller],
   providers: [AppService, AuthService, JwtService, S3Service],
 })
 export class AppModule {}
