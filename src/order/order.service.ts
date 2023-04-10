@@ -18,4 +18,15 @@ export class OrderService {
     });
     return checkOut;
   }
+
+  async orderByUser(userId) {
+    const result = await this._orderRepository.find({ userId: userId });
+    const populatedOrders = await Promise.all(
+      result.map(async (order) => {
+        const populatedOrder = await order.populate('eventId');
+        return populatedOrder;
+      }),
+    );
+    return result;
+  }
 }

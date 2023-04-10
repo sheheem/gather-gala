@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Query,
   UseGuards,
@@ -13,12 +14,14 @@ import { OrderDto } from 'src/dto/orderDTO/order.dto';
 import Stripe from 'stripe';
 import { InjectStripe } from 'nestjs-stripe';
 import { create } from 'domain';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Controller('order')
 export class OrderController {
   constructor(
     private _orderService: OrderService,
     @InjectStripe() private readonly stripeClient: Stripe,
+    private mailerService: MailerService,
   ) {}
 
   @Post('/checkOut')
@@ -78,12 +81,34 @@ export class OrderController {
     const session = await this.stripeClient.checkout.sessions.retrieve(
       sessionId,
     );
-    // console.log(session.metadata);
     if (session.payment_status === 'paid') {
       const checkOut = await this._orderService.orderCheckOut(session);
+      // console.log(session);
+      await this.mailerService.sendMail({
+        to: 'shaheemzainudeen@gmail.com',
+        subject: 'Welcome to our Gather Gala family!! ',
+        // template: './template/email-template',
+        text: 'hello',
+        context: {
+          name: session.customer_details.name,
+          ticketId: session.metadata.ticketId,
+        },
+      });
+      // console.log(session);
       return checkOut;
     } else {
       throw new Error('Payment Failed');
+    }
+  }
+
+  @Get('/findTicket/:id')
+  @UseGuards(AuthGuard('jwt'))
+  async findEventByUser(@Param() userId) {
+    try {
+      const ticketUser = await this._orderService.orderByUser(userId.id);
+      return { orders: ticketUser };
+    } catch (err) {
+      console.log(err);
     }
   }
 }
