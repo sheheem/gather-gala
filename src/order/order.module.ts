@@ -24,7 +24,7 @@ import { join } from 'path';
         secure: false,
         auth: {
           user: 'apikey',
-          pass: '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',
+          pass: process.env.SMTPPASS,
         },
       },
       defaults: {
