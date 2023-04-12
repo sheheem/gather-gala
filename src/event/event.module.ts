@@ -11,6 +11,7 @@ import { EventService } from './event.service';
     MongooseModule.forFeature([{ name: Event.name, schema: eventSchema }]),
     forwardRef(() => AuthModule),
   ],
+  exports: [EventRepositoray],
   controllers: [EventController],
   providers: [EventService, EventRepositoray],
 })

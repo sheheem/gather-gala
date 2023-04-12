@@ -39,6 +39,7 @@ export class VendorRepository extends Repository<VendorDocument> {
         vendorLogDto.password,
         vendor.password,
       );
+
       if (isMatch) {
         return vendor;
       } else {

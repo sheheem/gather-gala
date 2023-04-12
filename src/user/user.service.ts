@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Req } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  Req,
+} from '@nestjs/common';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -13,6 +18,18 @@ export class UserService {
     } catch (err) {
       console.log(err);
       throw new BadRequestException();
+    }
+  }
+
+  async updateProfile(id, updateUserDto) {
+    try {
+      const updateProfile = await this.userRepository.updateOne(
+        id,
+        updateUserDto,
+      );
+      return updateProfile;
+    } catch (err) {
+      throw new NotFoundException('User Not Found');
     }
   }
 }
