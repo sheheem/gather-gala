@@ -17,8 +17,12 @@ export class VendorService {
 
   async updateEvent(id, updateEventDto) {
     const updateEvent = await this._eventRepository.updateOne(
-      id,
-      updateEventDto,
+      {
+        _id: id.id,
+      },
+      {
+        $set: updateEventDto,
+      },
     );
     return updateEvent;
   }
