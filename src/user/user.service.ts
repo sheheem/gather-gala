@@ -23,10 +23,17 @@ export class UserService {
 
   async updateProfile(id, updateUserDto) {
     try {
+      console.log(updateUserDto, id.id);
       const updateProfile = await this.userRepository.updateOne(
-        id,
-        updateUserDto,
+        {
+          _id: id.id,
+        },
+        {
+          $set: updateUserDto,
+        },
       );
+      console.log(updateProfile);
+
       return updateProfile;
     } catch (err) {
       throw new NotFoundException('User Not Found');

@@ -1,4 +1,4 @@
-import { IsDateString } from 'class-validator';
+import { IsDateString, IsUrl } from 'class-validator';
 
 export class UpdateEventDto {
   eventName: string;
@@ -6,6 +6,8 @@ export class UpdateEventDto {
   eventDescription: string;
   ticket: TicketDto[];
   location: string;
+
+  @IsUrl()
   imageUrl: string;
   longitude: string;
   latitude: string;
