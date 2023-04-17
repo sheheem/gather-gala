@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Event } from 'src/event/event.schema';
 import { User } from 'src/user/user.schema';
+import { Vendor } from 'src/vendor/vendor.schema';
 
 export type OrderDocument = HydratedDocument<Order>;
 
@@ -15,6 +16,12 @@ export class Order {
 
   @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Event' })
   ticketId: Event;
+
+  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Vendor' })
+  organizerId: Vendor;
+
+  @Prop({ type: Date, required: true })
+  orderDate: Date;
 
   @Prop({ required: true })
   eventName: string;

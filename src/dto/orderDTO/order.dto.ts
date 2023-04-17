@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class OrderDto {
   @IsNotEmpty()
@@ -6,6 +6,9 @@ export class OrderDto {
 
   @IsNotEmpty()
   eventId: string;
+
+  @IsNotEmpty()
+  organizerId: string;
 
   @IsNotEmpty()
   eventName: string;
@@ -26,4 +29,7 @@ export class OrderDto {
   @IsNotEmpty()
   @IsNumber()
   totalPrice: number;
+
+  @IsDateString()
+  orderDate: Date;
 }

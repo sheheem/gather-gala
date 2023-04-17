@@ -8,6 +8,7 @@ export class OrderService {
   async orderCheckOut(session) {
     const checkOut = await this._orderRepository.create({
       userId: session.metadata.userId,
+      organizerId: session.metadata.organizerId,
       eventId: session.metadata.eventId,
       ticketId: session.metadata.ticketId,
       totalTickets: session.metadata.totalTickets,
@@ -15,6 +16,7 @@ export class OrderService {
       eventName: session.metadata.eventName,
       totalPrice: session.metadata.totalPrice,
       ticketPrice: session.metadata.ticketPrice,
+      orderDate: session.metadata.orderDate,
     });
     return checkOut;
   }
@@ -27,6 +29,11 @@ export class OrderService {
         return populatedOrder;
       }),
     );
+    return result;
+  }
+
+  async orderByVendor(vendorId) {
+    const result = await this._orderRepository.find({ organizerId: vendorId });
     return result;
   }
 }

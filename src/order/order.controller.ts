@@ -62,12 +62,14 @@ export class OrderController {
       metadata: {
         eventId: createOrder.eventId,
         userId: createOrder.userId,
+        organizerId: createOrder.organizerId,
         ticketId: createOrder.ticketId,
         eventName: createOrder.eventName,
         ticketType: createOrder.ticketType,
         totalPrice: createOrder.totalPrice,
         totalTickets: createOrder.totalTickets,
         ticketPrice: createOrder.ticketPrice,
+        orderDate: createOrder.orderDate.toString(),
       },
     });
     return { sessionId: source.id };
@@ -81,6 +83,8 @@ export class OrderController {
     const session = await this.stripeClient.checkout.sessions.retrieve(
       sessionId,
     );
+    console.log(session);
+
     if (session.payment_status === 'paid') {
       const checkOut = await this._orderService.orderCheckOut(session);
       // console.log(session);
@@ -107,6 +111,17 @@ export class OrderController {
     try {
       const ticketUser = await this._orderService.orderByUser(userId.id);
       return { orders: ticketUser };
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  @Get('/orderByVendor/:id')
+  @UseGuards(AuthGuard('jwt'))
+  async findOrderByVendor(@Param() vendorId) {
+    try {
+      const totalOrder = await this._orderService.orderByVendor(vendorId.id);
+      return { orders: totalOrder };
     } catch (err) {
       console.log(err);
     }
