@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreatedModel } from 'nestjs-mongoose-generic-repository';
 import { CreateEventDto } from 'src/dto/eventDTO/eventCreate.dto';
 import { EventRepositoray } from './event.repository';
@@ -30,6 +34,14 @@ export class EventService {
       return eventDetail;
     } catch (err) {
       throw new BadRequestException();
+    }
+  }
+
+  async deleteEvent(eventId) {
+    try {
+      return await this._eventRepository.deleteEvent(eventId);
+    } catch (err) {
+      throw new NotFoundException('Requested event not found');
     }
   }
 }

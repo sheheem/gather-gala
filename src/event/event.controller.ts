@@ -9,7 +9,7 @@ import {
 import { CreateEventDto } from 'src/dto/eventDTO/eventCreate.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { EventService } from './event.service';
-import { Param, Req } from '@nestjs/common/decorators';
+import { Delete, Param, Req } from '@nestjs/common/decorators';
 
 @Controller('event')
 export class EventController {
@@ -35,5 +35,11 @@ export class EventController {
     console.log(eventId);
     const eventDetail = await this._eventService.findEventDetail(eventId);
     return { eventDetail: eventDetail };
+  }
+
+  @Delete('/delete_event/:id')
+  @UseGuards(AuthGuard('jwt'))
+  async deleteEvent(@Param() eventId) {
+    return await this._eventService.deleteEvent(eventId);
   }
 }
