@@ -57,8 +57,8 @@ export class OrderController {
       ],
       mode: 'payment',
       success_url:
-        'http://localhost:4200/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:4200/cancel',
+        'https://gathergala.online/success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'https://gathergala.online/cancel',
       metadata: {
         eventId: createOrder.eventId,
         userId: createOrder.userId,
