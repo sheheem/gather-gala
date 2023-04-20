@@ -110,6 +110,7 @@ export class OrderController {
   async findEventByUser(@Param() userId) {
     try {
       const ticketUser = await this._orderService.orderByUser(userId.id);
+      console.log(ticketUser);
       return { orders: ticketUser };
     } catch (err) {
       console.log(err);

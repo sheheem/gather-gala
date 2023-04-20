@@ -13,7 +13,6 @@ export class EventService {
 
   async createEvent(model: CreateEventDto): Promise<CreatedModel> {
     const createdEvent = await this._eventRepository.create(model);
-    console.log(createdEvent);
     return createdEvent;
   }
 

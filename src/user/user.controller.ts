@@ -19,7 +19,6 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   async userProflie(@Req() req) {
     const userDetails = await this._userService.userProfile(req);
-    console.log(userDetails);
     return { profile: userDetails };
   }
 

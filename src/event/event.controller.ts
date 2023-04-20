@@ -25,14 +25,12 @@ export class EventController {
   @Get('/all_event')
   async findAllEvent(@Req() req) {
     const events = await this._eventService.findAllEvents();
-    console.log(events);
     return { event: events };
   }
 
   @Get('/event-detail/:id')
   async findEventById(@Param() p) {
     const eventId = p.id;
-    console.log(eventId);
     const eventDetail = await this._eventService.findEventDetail(eventId);
     return { eventDetail: eventDetail };
   }

@@ -13,7 +13,6 @@ export class UserService {
   async userProfile(req) {
     try {
       const userDetails = await this.userRepository.ufindOne(req.user.email);
-      console.log(userDetails);
       return userDetails;
     } catch (err) {
       console.log(err);
@@ -23,7 +22,6 @@ export class UserService {
 
   async updateProfile(id, updateUserDto) {
     try {
-      console.log(updateUserDto, id.id);
       const updateProfile = await this.userRepository.updateOne(
         {
           _id: id.id,
@@ -32,7 +30,6 @@ export class UserService {
           $set: updateUserDto,
         },
       );
-      console.log(updateProfile);
 
       return updateProfile;
     } catch (err) {
