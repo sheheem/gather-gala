@@ -38,6 +38,6 @@ export class EventController {
   @Delete('/delete_event/:id')
   @UseGuards(AuthGuard('jwt'))
   async deleteEvent(@Param() eventId) {
-    return await this._eventService.deleteEvent(eventId);
+    return await this._eventService.deleteEvent(eventId.id);
   }
 }
